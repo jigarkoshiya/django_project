@@ -7,3 +7,9 @@ def products(request):
     print(products)
     return HttpResponse(products)
 # Create your views here.
+
+
+from django.shortcuts import render
+def products(request):
+    products=Products.objects.all()
+    return render(request,'product.html', context={'products':products})

@@ -1,2 +1,5 @@
 djangojigar/
 djangoclass/bd.sqlite3
+
+
+djangoclass/djangoapp/__pycache__/
