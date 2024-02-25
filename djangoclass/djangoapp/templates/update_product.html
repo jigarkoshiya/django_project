@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+
+    <h1>Update product</h1>
+    
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{product_object.prouct_image.url}}" alt="Card image cap" style="height: 200px; width: 200px;">
+        <div class="card-body">
+          <h5 class="card-title">Product_name : {{product_object.product_name}}</h5>
+          <p class="card-text">Product_dicription : {{product_object.product_dec}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Product_price : {{product_object.price}}</li>
+          <li class="list-group-item">Product_Ratting : {{product_object.rating}}</li>
+          <li class="list-group-item">available_quantity : {{product_object.available_quantity}}</li>
+        </ul>
+      </div> <br><br><br>
+    </div>
+   
+
+   
+  {% endblock %}
