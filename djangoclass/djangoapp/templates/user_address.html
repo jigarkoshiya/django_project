@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row mt-3 mx-3" style="margin-top:25px ;">
+        
+        <div class="col-md-9 justify-content-center">
+          <div class="card card-custom pb-4">
+            <div class="card-body mt-0 mx-5">
+              <div class="text-center mb-3 pb-2 mt-3">
+                <h4 style="color: #495057 ;">Delivery Details</h4>
+              </div>
+      
+              <form class="mb-0" method="POST" action="{% url 'user_address' %}">
+                {% csrf_token %}
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <textarea type="text" id="line1" name="line1" class="form-control input-custom" placeholder="Enter your address" ></textarea>
+                      <label class="form-label" for="form9Example1">Address line 1</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                        <textarea type="text" id="line2" name="line2" class="form-control input-custom" placeholder="Enter your address area" ></textarea>
+                        <label class="form-label" for="form9Example1">Address line 2</label>
+                      </div>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" id="city" name="city" class="form-control input-custom" />
+                      <label class="form-label" for="form9Example3">City</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" id="zip_code" name="zip_code" class="form-control input-custom" />
+                      <label class="form-label" for="form9Example4">Zip</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-4">
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" id="state" name="state" class="form-control input-custom" />
+                      <label class="form-label" for="form9Example6">State</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-outline">
+                      <input type="text" id="country" name="country" class="form-control input-custom" />
+                      <label class="form-label" for="typeEmail">Country</label>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="float-end ">
+                  <!-- Submit button -->
+                  <button type="submit" class="btn btn-primary btn-rounded"
+                    style="background-color: #0062CC ;">Add address</button>
+                </div>
+      
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

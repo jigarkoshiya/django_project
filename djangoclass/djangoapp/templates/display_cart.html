@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <h1>{{user_obj.username.capitalize}}'s Cart ptoducts</h1>
+    <button id="order_now" name="order_now" onclick="selected_product();">Order Now</button>
+
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          Delivering to below address
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{user_address.line1}}, {{user_address.line2}}</li>
+          <li class="list-group-item">{{user_address.city}}, {{user_address.zip_code}}</li>
+          <li class="list-group-item">{{user_address.state}}, {{user_address.country}}</li>
+        </ul>
+      </div>
+
+      {% for cart in cart_obj %}
+      <div class="card" style="width: 18rem;">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="{{cart.id}}" name="checked_product" id="{{cart.id}}" onclick="checked_box('{{cart.id}}')">
+          <label class="form-check-label" for="flexCheckDefault">
+            Buy this product
+          </label>
+        </div> 
+          <img class="card-img-top" src="{{cart.product_id.product_image.url}}" alt="Card image cap" style="height: 200px; width: 200px;">
+          <div class="card-body">
+            <h5 class="card-title">Product Name : {{cart.product_id.product_name}}</h5>
+            <p class="card-text">Product Discription : {{cart.product_id.product_description}}</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Product Price : {{cart.product_id.price}}</li>
+            <li class="list-group-item">Product Rating : {{cart.product_id.rating}}</li>
+            <li class="list-group-item">Product Quentity : {{cart.quantity}}</li>
+          </ul>
+          <button><a href="{% url 'delete_cart_item' cart.id %}" class="card-link">Delete Product</a></button>
+        </div>
+      {% endfor%}
+  </div>
+</div>
+
+
+<script> 
+    
+    function selected_product() {
+      const checked_product = document.querySelectorAll('input[type="checkbox"]:checked');
+      let placed_items = []
+      for (let i=0; i<checked_product.length; i++) {
+        placed_items.push(checked_product[i].id)
+      }
+
+      console.log(placed_items)
+      $.ajax({ 
+        data: { 'product_placed' : placed_items  },
+        type: 'POST', 
+        url: 'http://127.0.0.1:8000/order_placed/',
+        success: function(data){  
+          console.log(data['addres_exists']) 
+          if (data['address_exists']) {
+            console.log(data)
+          } else if (data === undefined) {
+            window.location.href = "http://127.0.0.1:8000/user_address/"
+            console.log("Should not redirect to the page")
+            console.log(data)
+          }
+        }
+     });
+  }
+
+  function checked_box(id) {
+    const isChecked = document.getElementById(id).checked;
+    if (isChecked) {
+      document.getElementById(id).setAttribute("checked", "checked")
+    } else {
+      document.getElementById(id).removeAttribute("checked")
+    }
+  }
+
+
+</script>
+{% endblock %}

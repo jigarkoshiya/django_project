@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+<form style="width: 26rem;" method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">   <!--enctype="multipart/form-data"  image ke file add karvi hoi tyare aa lakhvu pade --> 
+{% csrf_token %}
+    <div data-mdb-input-init class="form-outline mb-4">
+      <input type="text" id="product_name" name="product_name" class="form-control" />
+      <label class="form-label" for="form4Example1">Product Name</label>
+    </div>
+  
+    <!-- Email input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      <textarea type="email" id="product_description" name="product_description" class="form-control"> </textarea>
+      <label class="form-label" for="form4Example2">Product Description</label>
+    </div>
+  
+    <!-- Message input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+      <input class="form-control" id="product_price" name="product_price" rows="4"></input>
+      <label class="form-label" for="form4Example3">Price</label>
+    </div>
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input class="form-control" id="product_rating" name="product_rating" rows="4"></input>
+        <label class="form-label" for="form4Example3">Rating</label>
+      </div>
+      <div data-mdb-input-init class="form-outline mb-4">
+        <input class="form-control" id="available_quantity" name="available_quantity" rows="4"></input>
+        <label class="form-label" for="form4Example3">Available Quantity</label>
+      </div>
+      <label class="form-label" for="customFile">Upload product iamge</label>
+      <input type="file" class="form-control" id="product_image" name="product_image" />    
+    <!-- Submit button -->
+    <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+  </form>
+</div>
+{% endblock %}
